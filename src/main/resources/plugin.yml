@@ -1,0 +1,10 @@
+name: Coins
+version: 1.0
+main: vip.descent.coins.CoinsHandler
+author: veltus5184
+depend: [DescentCore]
+description: Lightweight Coins Plugin
+commands:
+  coins:
+    description: Coins command!
+    aliases: [money, cash]
