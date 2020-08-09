@@ -36,6 +36,10 @@ public class CoinsHandler extends JavaPlugin {
 
         log.info("Initialized the database successfully!");
 
+        saveDefaultConfig();
+        getCommand("coins").setExecutor(new CoinsCommand(this, coinsAPI));
+        log.info("Registered the command!");
+
     }
 
     @Override
