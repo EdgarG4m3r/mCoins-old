@@ -1,13 +1,16 @@
 package vip.descent.coins;
 
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import vip.descent.coins.commands.CoinsCommand;
+import vip.descent.coins.events.OnJoin;
 
 import java.sql.*;
 import java.util.logging.Logger;
 
 public class CoinsHandler extends JavaPlugin {
 
-    private CoinsAPI coinsAPI;
+    private CoinsAPI coinsAPI = new CoinsAPI(this);
 
     public Connection connection;
     public Statement statement;
@@ -16,7 +19,9 @@ public class CoinsHandler extends JavaPlugin {
     private int port;
     private String username;
     private String password;
+    public PluginManager pm = getServer().getPluginManager();
     public static Logger log = Logger.getLogger("Minecraft");
+    private OnJoin onJoin = new OnJoin(this, coinsAPI);
 
 
     @Override
@@ -34,11 +39,12 @@ public class CoinsHandler extends JavaPlugin {
             sql.printStackTrace();
         }
 
-        log.info("Initialized the database successfully!");
+        log.info("[Coins] Initialized the database successfully!");
 
         saveDefaultConfig();
         getCommand("coins").setExecutor(new CoinsCommand(this, coinsAPI));
-        log.info("Registered the command!");
+        pm.registerEvents(onJoin, this);
+        log.info("[Coins] Registered the command!");
 
     }
 
