@@ -1,8 +1,10 @@
 # Thanks for downloading my plugin!
 # You rock bro - Veltus
+
+debug-messages: true
 mysql:
-  host: "localhost"
+  host: '170.10.163.64'
   port: 3306
-  database: "coins"
-  username: "admin"
-  password: "veltus5184"
+  database: descentv_coins
+  username: descentv_admin
+  password: sexdicks123
