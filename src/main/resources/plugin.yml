@@ -1,5 +1,5 @@
 name: Coins
-version: 1.0
+version: 1.4
 main: vip.descent.coins.CoinsHandler
 author: veltus5184
 description: Lightweight Coins Plugin
