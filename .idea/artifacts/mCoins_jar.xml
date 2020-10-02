@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="mCoins:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/mCoins_jar</output-path>
+    <root id="archive" name="mCoins.jar">
+      <element id="module-output" name="mCoins" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../HCMatrix Development/Custom/mUHC/libs/spigotx-server-1.8.8-R0.1-SNAPSHOT.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

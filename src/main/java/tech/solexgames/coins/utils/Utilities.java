@@ -105,12 +105,14 @@ public class Utilities {
             PreparedStatement st = plugin.connection.prepareStatement("SELECT * FROM coins ORDER BY coins DESC LIMIT 10");
             ResultSet rs = st.executeQuery();
 
-            p.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "Leaderboards:");
+            p.sendMessage(ChatColor.GRAY + ChatColor.STRIKETHROUGH.toString() + "------------------------------------");
+            p.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "Coins Leaderboards:");
             while (rs.next()) {
                 String name =  rs.getString(2);
                 int coins = rs.getInt(3);
-                p.sendMessage(ChatColor.BLUE + String.valueOf(++i + 0 / (i - 11)) + ChatColor.GRAY + ". "+ name + " - " + coins);
+                p.sendMessage(ChatColor.WHITE + "#" + String.valueOf(++i + 0 / (i - 11)) + ChatColor.GRAY + " - "+ ChatColor.GOLD + name + ChatColor.GRAY + " - " + ChatColor.WHITE + coins);
             }
+            p.sendMessage(ChatColor.GRAY + ChatColor.STRIKETHROUGH.toString() + "------------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
         }

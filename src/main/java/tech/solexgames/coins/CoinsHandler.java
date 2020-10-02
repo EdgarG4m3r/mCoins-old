@@ -29,6 +29,7 @@ public class CoinsHandler extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
         this.host = getConfig().getString("mysql.host");
         this.port = getConfig().getInt("mysql.port");
         this.database = getConfig().getString("mysql.database");
@@ -45,8 +46,10 @@ public class CoinsHandler extends JavaPlugin {
         log.info("[Coins] Initialized the database successfully!");
 
         saveDefaultConfig();
+
         getCommand("coins").setExecutor(new CoinsCommand(this, utilities));
         getCommand("pay").setExecutor(new PayCommand(this, utilities));
+
         pm.registerEvents(onJoin, this);
         log.info("[Coins] Registered the command!");
 

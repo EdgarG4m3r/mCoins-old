@@ -1,6 +1,7 @@
 package tech.solexgames.coins.commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -82,16 +83,18 @@ public class CoinsCommand implements CommandExecutor {
 
             if (p.hasPermission(plugin.getConfig().getString("manage-permission"))) {
                 if (args.length == 0) {
-                    sender.sendMessage("§6Coins: §7" + api.getCoins(p.getUniqueId().toString()));
+                    sender.sendMessage("§7§m------------------------------");
+                    sender.sendMessage("§fCoins: §6" + api.getCoins(p.getUniqueId().toString()));
+                    sender.sendMessage("§7§m------------------------------");
                     return true;
                 } else if (args[0].equalsIgnoreCase("help")) {
                     sender.sendMessage("§7§m------------------------------");
                     sender.sendMessage("§6§lCoins Help:");
-                    sender.sendMessage("/coins");
-                    sender.sendMessage("/coins set <player> <amount>");
-                    sender.sendMessage("/coins add <player> <amount>");
-                    sender.sendMessage("/coins remove <player> <amount>");
-                    sender.sendMessage("/coins top");
+                    sender.sendMessage(" /coins");
+                    sender.sendMessage(" /coins set <player> <amount>");
+                    sender.sendMessage(" /coins add <player> <amount>");
+                    sender.sendMessage(" /coins remove <player> <amount>");
+                    sender.sendMessage(" /coins top");
                     sender.sendMessage("§7§m------------------------------");
                     return true;
                 } else if (args[0].equalsIgnoreCase("set")) {
@@ -100,6 +103,7 @@ public class CoinsCommand implements CommandExecutor {
                         return true;
                     } else {
                         String target = Bukkit.getOfflinePlayer(args[1]).getUniqueId().toString();
+                        Player targetPlayer = Bukkit.getOfflinePlayer(args[1]).getPlayer();
                         int coin = Integer.parseInt(args[2]);
 
                         if (args[2].equalsIgnoreCase("0") || args[2].contains("-")) {
@@ -108,6 +112,7 @@ public class CoinsCommand implements CommandExecutor {
                         } else {
                             api.setCoins(target, coin);
                             sender.sendMessage("§aSuccessfully set " + args[1] + "'s coins to " + coin + "!");
+                            targetPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aYou balance has increased by " + coin + " coins!"));
                             return false;
                         }
                     }
@@ -140,11 +145,13 @@ public class CoinsCommand implements CommandExecutor {
                             sender.sendMessage("§aSuccessfully remove " + coin + " coins from " + args[1] + "!");
                         }
                     }
-                } else if (args[0].equalsIgnoreCase("top") || args[0].equalsIgnoreCase("lb")) {
+                } else if (args[0].equalsIgnoreCase("top") || args[0].equalsIgnoreCase("lb") || args[0].equalsIgnoreCase("leaderboard") || args[0].equalsIgnoreCase("leaderboards")) {
                     api.sendLeaderboardMessage(p, 0);
                 }
             } else {
-                sender.sendMessage("§6Coins: §7" + api.getCoins(p.getUniqueId().toString()));
+                sender.sendMessage("§7§m------------------------------");
+                sender.sendMessage("§fCoins: §6" + api.getCoins(p.getUniqueId().toString()));
+                sender.sendMessage("§7§m------------------------------");
             }
         }
 

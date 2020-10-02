@@ -27,7 +27,7 @@ public class OnJoin implements Listener {
             // do nothing LOL
 
             if (!plugin.getConfig().getBoolean("debug-messages")) {
-                plugin.log.info("[Coins] PLAYER " + e.getPlayer().getName() + " ALREADY HAVE A PROFILE");
+                plugin.log.info("[Coins] PLAYER " + e.getPlayer().getName() + " ALREADY HAS A PROFILE!");
             }
         }
     }
