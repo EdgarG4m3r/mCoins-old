@@ -1,10 +1,12 @@
-# Thanks for downloading my plugin!
+# Thanks for downloading mCoins plugin!
 # You rock bro - Veltus
 
 debug-messages: true
+
+manage-permission: coins.admin
 mysql:
-  host: '170.10.163.64'
+  host: localhost
   port: 3306
-  database: descentv_coins
-  username: descentv_admin
-  password: sexdicks123
+  database: coins
+  username: admin
+  password: 5184

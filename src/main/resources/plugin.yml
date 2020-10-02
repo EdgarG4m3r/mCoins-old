@@ -1,9 +1,12 @@
-name: Coins
-version: 1.4
-main: vip.descent.coins.CoinsHandler
+name: mCoins
+version: 1.5
+main: tech.solexgames.coins.CoinsHandler
 author: veltus5184
 description: Lightweight Coins Plugin
 commands:
   coins:
     description: Coins command!
     aliases: [money, cash]
+  pay:
+    description: Pay coins!
+    aliases: [send, transfer]
