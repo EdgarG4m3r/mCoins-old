@@ -1,13 +1,20 @@
 package tech.solexgames.coins.utils;
 
+import com.broustudio.MizuAPI.MizuAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import tech.solexgames.coins.CoinsHandler;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class Utilities {
 
@@ -15,6 +22,44 @@ public class Utilities {
 
     public Utilities(CoinsHandler plugin) {
         this.plugin = plugin;
+    }
+
+    private static final String CRAFT_BUKKIT_PACKAGE;
+    private static final String NET_MINECRAFT_SERVER_PACKAGE;
+
+    private static final Class CRAFT_SERVER_CLASS;
+    private static final Method CRAFT_SERVER_GET_HANDLE_METHOD;
+
+    private static final Class ENTITY_PLAYER_CLASS;
+    private static final Field ENTITY_PLAYER_PING_FIELD;
+
+    private static final Class CRAFT_PLAYER_CLASS;
+    private static final Method CRAFT_PLAYER_GET_HANDLE_METHOD;
+
+
+    static {
+        try {
+            String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
+
+            CRAFT_BUKKIT_PACKAGE = "org.bukkit.craftbukkit." + version + ".";
+            NET_MINECRAFT_SERVER_PACKAGE = "net.minecraft.server." + version + ".";
+
+            CRAFT_SERVER_CLASS = Class.forName(CRAFT_BUKKIT_PACKAGE + "CraftServer");
+            CRAFT_SERVER_GET_HANDLE_METHOD = CRAFT_SERVER_CLASS.getDeclaredMethod("getHandle");
+            CRAFT_SERVER_GET_HANDLE_METHOD.setAccessible(true);
+
+            CRAFT_PLAYER_CLASS = Class.forName(CRAFT_BUKKIT_PACKAGE + "entity.CraftPlayer");
+            CRAFT_PLAYER_GET_HANDLE_METHOD = CRAFT_PLAYER_CLASS.getDeclaredMethod("getHandle");
+            CRAFT_PLAYER_GET_HANDLE_METHOD.setAccessible(true);
+
+            ENTITY_PLAYER_CLASS = Class.forName(NET_MINECRAFT_SERVER_PACKAGE + "EntityPlayer");
+            ENTITY_PLAYER_PING_FIELD = ENTITY_PLAYER_CLASS.getDeclaredField("ping");
+            ENTITY_PLAYER_PING_FIELD.setAccessible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            throw new RuntimeException("Failed to initialize NMS");
+        }
     }
 
     public static int getCoins(String uuid) {
@@ -129,4 +174,35 @@ public class Utilities {
         }
         return true;
     }
+
+    public static int getPing(Player player) {
+        try {
+            int ping = ENTITY_PLAYER_PING_FIELD.getInt(CRAFT_PLAYER_GET_HANDLE_METHOD.invoke(player));
+
+            return ping > 0 ? ping : 0;
+        } catch (Exception e) {
+            return 1;
+        }
+    }
+
+    public static String colorPing(int ping) {
+        if (ping <= 40) {
+            return Utilities.translate("&a" + ping);
+        } else if (ping <= 100) {
+            return Utilities.translate("&e" + ping);
+        } else if (ping <= 120) {
+            return Utilities.translate("&6" + ping);
+        } else {
+            return Utilities.translate("&4" + ping);
+        }
+    }
+
+    public static String translate(String text) {
+        return ChatColor.translateAlternateColorCodes('&', text);
+    }
+
+    public static List<String> translate(List<String> text) {
+        return text.stream().map(Utilities::translate).collect(Collectors.toList());
+    }
+
 }

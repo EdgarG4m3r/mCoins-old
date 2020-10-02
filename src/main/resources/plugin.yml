@@ -1,9 +1,13 @@
 name: mCoins
-version: 1.5
+version: 1.5.5
 main: tech.solexgames.coins.CoinsHandler
-author: veltus5184
-description: Lightweight Coins Plugin
+author: [veltus5184, GrowlyX]
+description: Lightweight Coins Plugin, Now with Mizu Core Support!
+softdepend: [MizuAPI, Mizu]
 commands:
+  playerinfo:
+    description: Get your information!
+    aliases: [myinfo, playerinf, info]
   coins:
     description: Coins command!
     aliases: [money, cash]

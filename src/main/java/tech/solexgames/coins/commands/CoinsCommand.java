@@ -88,14 +88,14 @@ public class CoinsCommand implements CommandExecutor {
                     sender.sendMessage("§7§m------------------------------");
                     return true;
                 } else if (args[0].equalsIgnoreCase("help")) {
-                    sender.sendMessage("§7§m------------------------------");
+                    sender.sendMessage("§7§m---------------------------------------");
                     sender.sendMessage("§6§lCoins Help:");
                     sender.sendMessage(" /coins");
                     sender.sendMessage(" /coins set <player> <amount>");
                     sender.sendMessage(" /coins add <player> <amount>");
                     sender.sendMessage(" /coins remove <player> <amount>");
                     sender.sendMessage(" /coins top");
-                    sender.sendMessage("§7§m------------------------------");
+                    sender.sendMessage("§7§m---------------------------------------");
                     return true;
                 } else if (args[0].equalsIgnoreCase("set")) {
                     if (args.length <= 1) {
@@ -112,7 +112,7 @@ public class CoinsCommand implements CommandExecutor {
                         } else {
                             api.setCoins(target, coin);
                             sender.sendMessage("§aSuccessfully set " + args[1] + "'s coins to " + coin + "!");
-                            targetPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aYou balance has increased by " + coin + " coins!"));
+                            targetPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aYour balance has increased by " + coin + " coins!"));
                             return false;
                         }
                     }
@@ -142,7 +142,7 @@ public class CoinsCommand implements CommandExecutor {
                             sender.sendMessage("§cInvalid coin numbers!");
                         } else {
                             api.removeCoins(target, coin);
-                            sender.sendMessage("§aSuccessfully remove " + coin + " coins from " + args[1] + "!");
+                            sender.sendMessage("§aSuccessfully removed " + coin + " coins from " + args[1] + "!");
                         }
                     }
                 } else if (args[0].equalsIgnoreCase("top") || args[0].equalsIgnoreCase("lb") || args[0].equalsIgnoreCase("leaderboard") || args[0].equalsIgnoreCase("leaderboards")) {

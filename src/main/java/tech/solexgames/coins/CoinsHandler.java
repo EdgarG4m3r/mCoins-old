@@ -4,6 +4,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import tech.solexgames.coins.commands.CoinsCommand;
 import tech.solexgames.coins.commands.PayCommand;
+import tech.solexgames.coins.commands.PlayerInfoCommand;
 import tech.solexgames.coins.events.OnJoin;
 import tech.solexgames.coins.utils.Utilities;
 
@@ -48,10 +49,12 @@ public class CoinsHandler extends JavaPlugin {
         saveDefaultConfig();
 
         getCommand("coins").setExecutor(new CoinsCommand(this, utilities));
+        getCommand("playerinfo").setExecutor(new PlayerInfoCommand(this, utilities));
         getCommand("pay").setExecutor(new PayCommand(this, utilities));
 
         pm.registerEvents(onJoin, this);
-        log.info("[Coins] Registered the command!");
+        log.info("[Coins] Registered all commands!");
+        log.info("[Coins] Setup Complete!");
 
     }
 
