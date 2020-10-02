@@ -1,4 +1,4 @@
-# Coins Plugin
+# mCoins
 Lightweight and simple coins plugin.
 
 ## Commands
