@@ -8,7 +8,7 @@ Lightweight and simple coins plugin.
 - /coins remove <player> <amount> - Removes an amount of coins from a player
   
 ## Dependencies
-- A working MySQL Database
+- A working MySQL 5.0 Database
 
 ## Installation
 It's very simple, just drag and drop it into the plugins folder and reload/start/restart your server.
