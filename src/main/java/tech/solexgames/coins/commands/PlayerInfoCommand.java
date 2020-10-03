@@ -1,7 +1,5 @@
 package tech.solexgames.coins.commands;
 
-import com.broustudio.MizuAPI.MizuAPI;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -33,12 +31,6 @@ public class PlayerInfoCommand implements CommandExecutor {
         p.sendMessage(Utilities.translate("&fUsername: &6" + p.getDisplayName()));
         p.sendMessage(Utilities.translate("&fPing: " + Utilities.colorPing(Utilities.getPing(p))));
         p.sendMessage(Utilities.translate("&fCoins: " + Utilities.getCoins(p.getUniqueId().toString())));
-
-        if (Bukkit.getPluginManager().isPluginEnabled("Mizu") || Bukkit.getPluginManager().isPluginEnabled("MizuAPI")) {
-            p.sendMessage(Utilities.translate("&fRank: " + MizuAPI.getAPI().getRankColor(MizuAPI.getAPI().getRank(p.getUniqueId())) + MizuAPI.getAPI().getRank(p.getUniqueId())));
-            p.sendMessage(Utilities.translate("&fTag: " + MizuAPI.getAPI().getTagDisplay(MizuAPI.getAPI().getTag(p.getUniqueId()))));
-        }
-
         p.sendMessage(Utilities.translate("&7&m---------------------------------------"));
 
         return false;

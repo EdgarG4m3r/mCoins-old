@@ -1,10 +1,8 @@
 package tech.solexgames.coins.utils;
 
-import com.broustudio.MizuAPI.MizuAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import tech.solexgames.coins.CoinsHandler;
 
 import java.lang.reflect.Field;
